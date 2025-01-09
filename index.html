@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Type Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clothing Type Predictor</h1>
+
+        <div class="form-group">
+            <label for="age">Enter Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="clothing_type">Enter Clothing Type:</label>
+            <input type="text" id="clothing_type" placeholder="e.g., Casual, Formal, Sports" required>
+        </div>
+
+        <div class="form-group">
+            <label for="season">Select Season:</label>
+            <select id="season">
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+                <option value="autumn">Autumn</option>
+                <option value="winter">Winter</option>
+            </select>
+        </div>
+
+        <button onclick="predictClothing()">Predict Clothing Type</button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function predictClothing() {
+            const age = parseInt(document.getElementById('age').value);
+            const clothingType = document.getElementById('clothing_type').value.trim();
+            const season = document.getElementById('season').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!age || !clothingType) {
+                resultDiv.innerHTML = 'Please enter a valid age and clothing type.';
+                return;
+            }
+
+            let clothingPrediction = '';
+
+            switch (season) {
+                case 'spring':
+                    clothingPrediction = `For a ${clothingType} style, in spring you might choose lighter jackets, cardigans, and breathable fabrics.`;
+                    break;
+                case 'summer':
+                    clothingPrediction = `For ${clothingType} clothing, in summer you may wear light dresses, t-shirts, and shorts for comfort.`;
+                    break;
+                case 'autumn':
+                    clothingPrediction = `Autumn clothing for ${clothingType} styles typically involves sweaters, scarves, and layered clothing.`;
+                    break;
+                case 'winter':
+                    clothingPrediction = `For ${clothingType} in winter, you would likely choose warmer coats, boots, and thermal fabrics.`;
+                    break;
+                default:
+                    clothingPrediction = 'Please select a valid season.';
+                    break;
+            }
+
+            resultDiv.innerHTML = `Prediction for a ${age}-year-old in the ${season} season with ${clothingType} clothing: ${clothingPrediction}`;
+        }
+    </script>
+</body>
+</html>
